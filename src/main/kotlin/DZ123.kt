@@ -1,9 +1,5 @@
 fun main() {
-    val trackPrice: Int = 100
-    val startDiscount1: Int = 1_001
-    val startDiscount2: Int = 10_001
-    val startDiscount3 = "меломан"
-
+    val trackPrice = 100
 
     class Melo(var num: String, var name: String, var rating: String, var cash: Int) {
         override fun toString(): String {
@@ -21,7 +17,7 @@ fun main() {
     while (true) {
         println("Добрый день! Кто готов совершить покупки? Введите свой номер.")
         println("Или введите q для выхода")
-        var vvod = readLine()
+        val vvod = readLine()
         if (vvod == "q") {
             println("Итог последних приобретений.")
             melomans.forEach { println(it) }
@@ -32,27 +28,27 @@ fun main() {
         vvod1 = vvod1?.minus(1)
 
         println("Добрый день " + melomans[vvod1!!].name + "! Cколько композиций Вы хотите приобрести?")
-        var count1 = readLine()
-        var count = count1?.toInt()
+        val count1 = readLine()
+        val count = count1?.toInt()
         var summ = count?.times(trackPrice)
-        if (summ!! >= startDiscount2) {
+        if (summ!! >= 10_001) {
             summ = summ / 100 * 95
             println(" Ваша скидка 5%")
             println("Сумма к оплате $summ")
-            if (melomans[vvod1].rating == startDiscount3) println(" Cкидка 1% за меломанство ")
-            summ = summ / 100 * 99
-            println("Сумма к оплате $summ")
-            melomans[vvod1!!].cash = summ
-
-        } else if (summ >= startDiscount1) {
-            summ -= 100
-            println(" Ваша скидка 100р")
-            println("Сумма к оплате $summ")
-            if (melomans[vvod1].rating == startDiscount3) println(" Cкидка 1% за меломанство")
+            if (melomans[vvod1].rating == "меломан") println(" Cкидка 1% за меломанство ")
             summ = summ / 100 * 99
             println("Сумма к оплате $summ")
             melomans[vvod1].cash = summ
-        } else if (melomans[vvod1].rating == startDiscount3) {
+
+        } else if (summ >= 1_001) {
+            summ -= 100
+            println(" Ваша скидка 100р")
+            println("Сумма к оплате $summ")
+            if (melomans[vvod1].rating == "меломан") println(" Cкидка 1% за меломанство")
+            summ = summ / 100 * 99
+            println("Сумма к оплате $summ")
+            melomans[vvod1].cash = summ
+        } else if (melomans[vvod1].rating == "меломан") {
             summ = summ / 100 * 99
             println(" Cкидка 1% за меломанство")
             println("Сумма к оплате $summ")
