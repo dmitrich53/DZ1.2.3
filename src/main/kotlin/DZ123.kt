@@ -17,46 +17,43 @@ fun main() {
     while (true) {
         println("Добрый день! Кто готов совершить покупки? Введите свой номер.")
         println("Или введите q для выхода")
-        val vvod = readLine()
-        if (vvod == "q") {
+        val input = readLine()
+        if (input == "q") {
             println("Итог последних приобретений.")
             melomans.forEach { println(it) }
             break
         }
-        var vvod1 = vvod?.toInt()
+        val userNumber = input?.toInt()?.minus(1)
 
-        vvod1 = vvod1?.minus(1)
-
-        println("Добрый день " + melomans[vvod1!!].name + "! Cколько композиций Вы хотите приобрести?")
-        val count1 = readLine()
-        val count = count1?.toInt()
+        println("Добрый день " + melomans[userNumber!!].name + "! Cколько композиций Вы хотите приобрести?")
+        val count = readLine()?.toInt()
         var summ = count?.times(trackPrice)
         if (summ!! >= 10_001) {
             summ = summ / 100 * 95
             println(" Ваша скидка 5%")
             println("Сумма к оплате $summ")
-            if (melomans[vvod1].rating == "меломан") println(" Cкидка 1% за меломанство ")
+            if (melomans[userNumber].rating == "меломан") println(" Cкидка 1% за меломанство ")
             summ = summ / 100 * 99
             println("Сумма к оплате $summ")
-            melomans[vvod1].cash = summ
+            melomans[userNumber].cash = summ
 
         } else if (summ >= 1_001) {
             summ -= 100
             println(" Ваша скидка 100р")
             println("Сумма к оплате $summ")
-            if (melomans[vvod1].rating == "меломан") println(" Cкидка 1% за меломанство")
+            if (melomans[userNumber].rating == "меломан") println(" Cкидка 1% за меломанство")
             summ = summ / 100 * 99
             println("Сумма к оплате $summ")
-            melomans[vvod1].cash = summ
-        } else if (melomans[vvod1].rating == "меломан") {
+            melomans[userNumber].cash = summ
+        } else if (melomans[userNumber].rating == "меломан") {
             summ = summ / 100 * 99
             println(" Cкидка 1% за меломанство")
             println("Сумма к оплате $summ")
-            melomans[vvod1].cash = summ
+            melomans[userNumber].cash = summ
         } else {
             println(" Скидки нет.")
             println("Сумма к оплате $summ")
-            melomans[vvod1].cash = summ
+            melomans[userNumber].cash = summ
         }
     }
 }
